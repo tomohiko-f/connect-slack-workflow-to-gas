@@ -2,6 +2,16 @@
 slackワークフローの申請内容をGASでSpread Sheet・Google Calendarに登録するスクリプト。
 本番環境への作業申請記録を自動化したものです。
 
+## 事前準備
+1. Slackワークフローを作成する  
+    1. フォームの作成
+    2. メッセージの作成
+        メッセージ送信は以下のように設定する必要があります。
+        ``` 
+        SlackToSpreadSheet
+        ,,project::{@可変テキスト},,worker::{@フォーム申請者(Email Address)},,pmo::{@ユーザー(Email Address)},,member::{@ユーザー(Email Address)},,startDate::{@可変テキスト},,endDate::{@可変テキスト},,tasks::{@可変テキスト}
+        ```
+
 ## 開発方法
 以下は、claspを使用した開発方法の手順です。
 
@@ -36,7 +46,7 @@ clasp push
 
 ### 4. デプロイ
 
-デプロイはGooggle App ScriptのGUIで実施してください。
+デプロイはGoggle App ScriptのGUIで実施してください。
 
 1. 新しいデプロイ > 種類の選択: ウェブアプリ
 2. 次のユーザーとして実行: 自分

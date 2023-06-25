@@ -17,7 +17,7 @@ const configs = {
   permanentGuests: [""] // カレンダー: 必須で招待するゲストのメールアドレス
 };
 
-// [${slack workflow param}, ${spread sheet column}]
+// [${slack workflow param}, ${spread sheet row}]
 const cellMap: [keyof Payload, string][] = [
   ["project", "1"],
   ["worker", "2"],
