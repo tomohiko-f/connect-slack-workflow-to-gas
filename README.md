@@ -1,4 +1,4 @@
-# production-task-requester
+# connect-slack-workflow-to-gas
 slackワークフローの申請内容をGASでSpread Sheet・Google Calendarに登録するスクリプト。
 本番環境への作業申請記録を自動化したものです。
 
