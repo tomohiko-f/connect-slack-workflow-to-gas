@@ -77,8 +77,8 @@ function convertPostMessageToPayload(postMessage: string): Payload{
         if (["worker", "pmo", "member"].includes(key)) {
           acc[key] = value.replace(/.*:/, "").replace(/\|.*/, "");
         } else if (["startDate", "endDate"].includes(key)) {
-          const date = new Date(value)
-          acc[key] = formatDate(date);
+          const formatDate = formatDateTimeString(value);
+          acc[key] = convertToJPT(new Date(formatDate));
         } else {
           acc[key] = value;
         }
@@ -114,6 +114,23 @@ function registerSchedule(payload: Payload) {
   calendar.createEvent(title, startTime, endTime, options);
 }
 
-function formatDate(date: Date): string {
-  return date.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }).replace(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}).*/, "$1/$2/$3 $4:$5");
+function formatDateTimeString(dateTimeString: string): string {
+  const regex = /^(\d{4})[\/\s-+]?(\d{2})[\/\s-+]?(\d{2})[\/\s-+]?(\d{2})[:+]?(\d{2})$/;
+  const matches = dateTimeString.match(regex);
+
+  if (matches) {
+    const year = matches[1];
+    const month = matches[2];
+    const day = matches[3];
+    const hour = matches[4];
+    const minute = matches[5];
+
+    return `${year}/${month}/${day} ${hour}:${minute}`;
+  } else {
+    return '';
+  }
+}
+
+function convertToJPT(date: Date): string {
+  return date.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
 }
